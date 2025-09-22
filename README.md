@@ -60,3 +60,10 @@ Conclusion
 
 This project demonstrates fundamental data analysis skills, effective visualization techniques, and the ability to create an interactive Python web application. It successfully meets all the
 assignment requirements and provides a clear, insightful exploration of the CORD-19 research papers.
+
+
+**Note:** The full metadata.csv is too large to include in this repository. 
+A sample file (`metadata_sample.csv`) is included for testing and demonstration purposes. 
+If you want to use the full dataset, download it from Kaggle:
+https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge
+
