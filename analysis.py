@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from wordcloud import WordCloud
+import os
 
 # -------------------------------
 # Load Data Function
@@ -11,18 +12,21 @@ from wordcloud import WordCloud
 def load_data(sample_size=None):
     usecols = ["title", "abstract", "publish_time", "authors", "journal", "source_x"]
 
+    # Use sample CSV if full CSV not found
+    csv_file = "metadata.csv"
+    if not os.path.exists(csv_file):
+        st.warning("metadata.csv not found. Using metadata_sample.csv instead.")
+        csv_file = "metadata_sample.csv"
+
     try:
         if sample_size:
-            # Load a small random sample
-            df = pd.read_csv("metadata.csv", usecols=usecols).sample(n=sample_size, random_state=42)
+            df = pd.read_csv(csv_file, usecols=usecols).sample(n=sample_size, random_state=42)
         else:
-            # Load full file
-            df = pd.read_csv("metadata.csv", usecols=usecols)
+            df = pd.read_csv(csv_file, usecols=usecols)
         return df
     except MemoryError:
-        # Fallback to 5000-row sample if memory fails
-        st.warning("MemoryError: falling back to a smaller sample (5000 rows).")
-        df = pd.read_csv("metadata.csv", usecols=usecols).sample(n=5000, random_state=42)
+        st.warning("MemoryError: falling back to a smaller sample (500 rows).")
+        df = pd.read_csv(csv_file, usecols=usecols).sample(n=500, random_state=42)
         return df
 
 # -------------------------------
